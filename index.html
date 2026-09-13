@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Saya</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+        :root {
+            --text-0: #ffffff;
+            --text-1: #cccccc;
+            --text-2: #999999;
+            --accent-1: #7c5cfc;
+            --accent-2: #00d4d4;
+            --accent-3: #ff6b9d;
+            --radius-xl: 20px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --font-sans: 'Inter', 'Segoe UI', sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', sans-serif;
+            --line: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: transparent;
+            color: var(--text-0);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 1.5rem 1.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            margin-bottom: -90px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .bubble-chat {
+            position: absolute;
+            top: -30px;
+            left: 40%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+            pointer-events: none;
+            font-family: var(--font-sans);
+            letter-spacing: 0.3px;
+        }
+        .bubble-chat::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 35%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid rgba(234, 226, 226, 0.6);
+        }
+
+        .avatar-ring {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            position: relative;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 4px;
+        }
+
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            background-image: url('assets/border.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 2;
+            animation: spin 25s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar-ring img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            border: 4px solid transparent;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.45rem 0.75rem;
+        }
+
+        .title-badge {
+            display: inline-block;
+            height: 1.5em;
+            width: auto;
+            object-fit: contain;
+            vertical-align: middle;
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            vertical-align: middle;
+            flex-shrink: 0;
+            pointer-events: none;
+            user-select: none;
+            margin-left: -4px;
+        }
+
+        .dev-stats-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin: 1rem auto 1.2rem;
+            padding: 2px;
+            border-radius: calc(var(--radius-lg) + 2px);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .dev-stats-wrap::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            aspect-ratio: 1 / 1;
+            transform: translate(-50%, -50%);
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 255, 255, 0)    0deg,
+                rgba(255, 255, 255, 0.12) 35deg,
+                rgba(255, 255, 255, 0.85) 70deg,
+                rgba(255, 255, 255, 1)    85deg,
+                rgba(255, 255, 255, 0.12) 120deg,
+                rgba(255, 255, 255, 0)    155deg,
+                rgba(255, 255, 255, 0)    180deg,
+                rgba(255, 255, 255, 0.12) 215deg,
+                rgba(255, 255, 255, 0.85) 250deg,
+                rgba(255, 255, 255, 1)    265deg,
+                rgba(255, 255, 255, 0.12) 300deg,
+                rgba(255, 255, 255, 0)    335deg,
+                rgba(255, 255, 255, 0)    360deg
+            );
+            animation: borderSpin 4.5s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes borderSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to   { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .dev-stats {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(16, 16, 24, 0.94), rgba(8, 8, 14, 0.94));
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow: hidden;
+        }
+
+        .dev-tagline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            background: rgba(255, 255, 255, 0.035);
+            border-bottom: 1px solid var(--line);
+        }
+        .dev-tagline .tagline {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-1);
+            letter-spacing: 0.4px;
+            line-height: 1.5;
+            margin: 0;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .dev-stats-row {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            border-bottom: 1px solid #9e9e9e4d;
+        }
+
+        .dev-stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            position: relative;
+        }
+        .dev-stat-item + .dev-stat-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 22%;
+            bottom: 22%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+        .dev-stat-value {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+        .dev-stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.3px;
+            color: var(--text-1);
+            margin-top: 0.3rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .social-section {
+            position: relative;
+            width: 100%;
+            padding: 1.5rem 1.5rem 1.75rem;
+            background-image:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 100%),
+                url('assets/bgs.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .social-card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 1.15rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .social-card-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            margin-left: 0.35rem;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .social-link {
+            --brand: #ffffff;
+            --brand-rgb: 255, 255, 255;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.7rem 0.8rem 0.7rem 1.1rem;
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.34);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12%;
+            bottom: 12%;
+            width: 3px;
+            border-radius: 0 3px 3px 0;
+            background: var(--brand);
+            opacity: 0.5;
+        }
+
+        .social-link:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(var(--brand-rgb), 0.5);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+            top: 0;
+            bottom: 0;
+        }
+
+        .social-link-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .social-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: rgba(var(--brand-rgb), 0.13);
+            border: 1px solid rgba(var(--brand-rgb), 0.24);
+            color: var(--brand);
+        }
+
+        .social-link:hover .social-logo {
+            background: rgba(var(--brand-rgb), 0.25);
+            border-color: rgba(var(--brand-rgb), 0.55);
+        }
+
+        .social-logo svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            display: block;
+        }
+
+        .social-meta {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            line-height: 1.25;
+            text-align: left;
+        }
+
+        .social-name {
+            font-size: 0.63rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            color: var(--brand);
+            opacity: 0.9;
+        }
+
+        .social-handle {
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+        }
+
+        .github-color   { --brand: #f0f6fc; --brand-rgb: 240, 246, 252; }
+        .telegram-color { --brand: #2aabee; --brand-rgb: 42, 171, 238; }
+        .whatsapp-color { --brand: #25d366; --brand-rgb: 37, 211, 102; }
+
+        .copy-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.62);
+            cursor: pointer;
+        }
+
+        .copy-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            display: block;
+        }
+
+        .copy-btn:hover {
+            color: #ffffff;
+            background: rgba(var(--brand-rgb), 0.18);
+            border-color: rgba(var(--brand-rgb), 0.45);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.92);
+        }
+
+        .copy-btn.copied {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.14);
+            border-color: rgba(74, 222, 128, 0.5);
+        }
+
+        .copy-btn.copied:hover {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.2);
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 32px;
+            transform: translate(-50%, 24px);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.72rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(12, 12, 18, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.9),
+                        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+            color: #ffffff;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .toast svg {
+            width: 16px;
+            height: 16px;
+            fill: #4ade80;
+            flex-shrink: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dev-stats-wrap::before,
+            .avatar-ring::before {
+                animation: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem 1rem 2rem; }
+            .hero h1 { font-size: 1.6rem; gap: 0.4rem 0.6rem; }
+            .title-badge { height: 1.35em; }
+            .verified-badge { width: 19px; height: 19px; }
+            .avatar-ring { width: 140px; height: 140px; }
+            .avatar-ring::before { inset: -14px; }
+            .hero-banner { margin-bottom: -75px; }
+            .dev-tagline { padding: 0.7rem 1rem; }
+            .dev-tagline .tagline { font-size: 0.88rem; }
+            .dev-stat-item { padding: 1rem 1rem; }
+            .dev-stat-value { font-size: 1.45rem; }
+            .dev-stat-label { font-size: 0.8rem; letter-spacing: 1px; }
+            .social-section { padding: 1.2rem 1.1rem 1.4rem; }
+            .social-card-title { font-size: 0.95rem; letter-spacing: 1.3px; margin-bottom: 1rem; }
+            .social-link { padding: 0.65rem 0.7rem 0.65rem 0.95rem; border-radius: 13px; }
+            .social-logo { width: 32px; height: 32px; border-radius: 10px; }
+            .social-logo svg { width: 16px; height: 16px; }
+            .social-name { font-size: 0.58rem; letter-spacing: 1.2px; }
+            .social-handle { font-size: 0.85rem; }
+            .copy-btn { width: 34px; height: 34px; border-radius: 10px; }
+            .copy-btn svg { width: 16px; height: 16px; }
+            .bubble-chat { top: -28px; font-size: 11px; padding: 8px 25px; }
+            .bubble-chat::after {
+                border-left-width: 6px;
+                border-right-width: 6px;
+                border-top-width: 6px;
+                bottom: -6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.4rem; gap: 0.35rem 0.5rem; }
+            .title-badge { height: 1.2em; }
+            .verified-badge { width: 17px; height: 17px; }
+            .avatar-ring { width: 120px; height: 120px; }
+            .avatar-ring::before { inset: -12px; }
+            .hero-banner { margin-bottom: -65px; }
+            .dev-tagline { padding: 0.6rem 0.8rem; }
+            .dev-tagline .tagline { font-size: 0.78rem; letter-spacing: 0.2px; }
+            .dev-stat-item { padding: 0.85rem 0.6rem; }
+            .dev-stat-value { font-size: 1.2rem; }
+            .dev-stat-label { font-size: 0.72rem; letter-spacing: 0.7px; }
+            .social-section { padding: 1rem 0.85rem 1.2rem; }
+            .social-card-title { font-size: 0.85rem; letter-spacing: 1.1px; margin-bottom: 0.85rem; }
+            .social-links { gap: 0.55rem; }
+            .social-link { padding: 0.55rem 0.6rem 0.55rem 0.8rem; border-radius: 12px; }
+            .social-link-left { gap: 0.65rem; }
+            .social-logo { width: 29px; height: 29px; border-radius: 9px; }
+            .social-logo svg { width: 14px; height: 14px; }
+            .social-name { font-size: 0.53rem; letter-spacing: 1px; }
+            .social-handle { font-size: 0.78rem; }
+            .copy-btn { width: 31px; height: 31px; border-radius: 9px; }
+            .copy-btn svg { width: 15px; height: 15px; }
+            .toast { bottom: 20px; font-size: 0.78rem; padding: 0.62rem 1rem; }
+            .bubble-chat { top: -24px; font-size: 10px; padding: 8px 25px; }
+            .bubble-chat::after {
+                border-left-width: 5px;
+                border-right-width: 5px;
+                border-top-width: 5px;
+                bottom: -5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="hero">
+            <img src="https://i.pinimg.com/1200x/46/25/dc/4625dc650f686ba9ddb7d24df89cd411.jpg" alt="Banner" class="hero-banner">
+
+            <div class="avatar-wrapper" id="avatarWrapper" title="Foto Profil">
+                <div class="bubble-chat">I'm a Developer</div>
+                <div class="avatar-ring">
+                    <img src="assets/profile.jpg" id="profileImage">
+                </div>
+            </div>
+
+            <h1>
+                <img src="assets/tittle.png" alt="Title" class="title-badge">
+                <span id="heroName">nama</span>
+                <img src="assets/verified.png" alt="Verified" class="verified-badge">
+            </h1>
+
+            <div class="dev-stats-wrap">
+                <div class="dev-stats">
+
+                    <div class="dev-tagline">
+                        <p class="tagline" id="heroTagline">Software Engineer &amp; Cybersecurity Enthusiast</p>
+                    </div>
+
+                    <div class="dev-stats-row">
+                        <div class="dev-stat-item">
+                            <span class="dev-stat-value">jumlah</span>
+                            <span class="dev-stat-label">Projects &amp; Eksperiments</span>
+                        </div>
+                        <div class="dev-stat-item">
+                            <span class="dev-stat-value">jumlah</span>
+                            <span class="dev-stat-label">Pengalaman</span>
+                        </div>
+                    </div>
+
+                    <div class="social-section">
+                        <div class="social-card-title">Sosial Media</div>
+                        <div class="social-links">
+
+                            <div class="social-link github-color">
+                                <span class="social-link-left">
+                                    <span class="social-logo">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.26.82-.58 0-.287-.01-1.24-.015-2.25-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.306.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.235-3.22-.123-.3-.535-1.52.117-3.16 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.64.24 2.86.118 3.16.768.84 1.233 1.91 1.233 3.22 0 4.61-2.804 5.62-5.476 5.92.43.37.824 1.102.824 2.22 0 1.602-.015 2.894-.015 3.287 0 .322.216.698.825.578C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                                        </svg>
+                                    </span>
+                                    <span class="social-meta">
+                                        <span class="social-name">GitHub</span>
+                                        <span class="social-handle">github saya</span>
+                                    </span>
+                                </span>
+                                <button class="copy-btn" data-url="https://github.com/" title="Salin link" aria-label="Salin link GitHub">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
+                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="social-link telegram-color">
+                                <span class="social-link-left">
+                                    <span class="social-logo">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                        </svg>
+                                    </span>
+                                    <span class="social-meta">
+                                        <span class="social-name">Telegram</span>
+                                        <span class="social-handle">telegram saya</span>
+                                    </span>
+                                </span>
+                                <button class="copy-btn" data-url="https://t.me/" title="Salin link" aria-label="Salin link Telegram">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
+                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="social-link whatsapp-color">
+                                <span class="social-link-left">
+                                    <span class="social-logo">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                                        </svg>
+                                    </span>
+                                    <span class="social-meta">
+                                        <span class="social-name">WhatsApp</span>
+                                        <span class="social-handle">nomer saya</span>
+                                    </span>
+                                </span>
+                                <button class="copy-btn" data-url="https://wa.me/" title="Salin link" aria-label="Salin link WhatsApp">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="copy-icon">
+                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        (function() {
+            const userData = {
+                name: 'nama saya',
+                profileImage: 'assets/profile.jpg',
+                tagline: 'Software Engineer & Cybersecurity Enthusiast'
+            };
+
+            document.getElementById('heroName').textContent = userData.name;
+            document.getElementById('heroTagline').textContent = userData.tagline;
+            const profileImg = document.getElementById('profileImage');
+            profileImg.src = userData.profileImage;
+            profileImg.alt = 'Foto profil ' + userData.name;
+
+            const checkmarkSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>';
+            const toast = document.getElementById('toast');
+            let toastTimer = null;
+
+            function showToast(message) {
+                toast.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><span>' + message + '</span>';
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 2200);
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const url = this.getAttribute('data-url');
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(url).then(function() {
+                            showCopiedFeedback(btn);
+                        }).catch(function() {
+                            fallbackCopy(url, btn);
+                        });
+                    } else {
+                        fallbackCopy(url, btn);
+                    }
+                });
+            });
+
+            function fallbackCopy(url, btn) {
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopiedFeedback(btn);
+                } catch (err) {}
+                document.body.removeChild(textarea);
+            }
+
+            function showCopiedFeedback(btn) {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = checkmarkSVG;
+                btn.classList.add('copied');
+                showToast('Link berhasil disalin');
+                clearTimeout(btn._timeout);
+                btn._timeout = setTimeout(function() {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+        })();
+    </script>
+</body>
+</html>
