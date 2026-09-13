@@ -15,17 +15,6 @@ Website portofolio personal dengan desain modern, minimalis, dan responsif.
 * CSS3
 * JavaScript
 
-## Struktur
-portfolio/
-├── index.html
-├── README.md
-└── assets/
-    ├── profile.jpg
-    ├── border.png
-    ├── tittle.png
-    ├── verified.png
-    └── bgs.jpg
-
 ## Penggunaan
 Clone repository lalu buka index.html di browser.
 git clone https://github.com/morpheusec0x/webui-portofolio-whatsApp
